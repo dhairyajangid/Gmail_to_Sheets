@@ -1,0 +1,27 @@
+# OAuth credentials and tokens - NEVER COMMIT
+credentials/credentials.json
+credentials/token.json
+credentials/sheets_token.json
+
+# State file (contains email IDs)
+state.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
