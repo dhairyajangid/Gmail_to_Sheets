@@ -2,11 +2,13 @@
 
 **Author:** [Your Full Name]
 
+---
+
 ## 📖 What This Does
 
 Automatically reads unread emails from Gmail and saves them to Google Sheets.
 
-**Features:**
+### Features:
 - ✅ No duplicate emails
 - ✅ Marks emails as read after processing
 - ✅ Logs everything with timestamps
@@ -23,7 +25,7 @@ Unread Emails   Parse Data    Save Rows
 Mark as Read    Check State   Avoid Duplicates
 ```
 
-**Flow:**
+### Flow:
 1. Script reads unread Gmail emails
 2. Checks `state.json` to see which emails we already processed
 3. Only processes NEW emails
@@ -59,33 +61,47 @@ gmail-to-sheets/
 ## 🚀 Setup Instructions
 
 ### Step 1: Install Python Packages
+
 ```bash
 pip install -r requirements.txt
 ```
 
+---
+
 ### Step 2: Add credentials.json
-1. Go to the google cloud console make the project name whatever you like.
-2. Then enable the api by searching Gmail API and Google Sheets API.
-3. Then create OAuth client ID there you find the json file to download ` it's client secret `
-4. Put it in: `credentials/credentials.json` you can rename the json file to credentials.json.
-5. In google cloud project go to Audience section to add test
-6. You will see there test user you need to add your gmail there from which you will parser the emails and show it on sheets.
+
+1. Go to the **Google Cloud Console** and create a project (name it whatever you like)
+2. Enable the APIs by searching **Gmail API** and **Google Sheets API**
+3. Create **OAuth client ID** - download the JSON file (it's `client_secret`)
+4. Put it in: `credentials/credentials.json` (you can rename the JSON file to `credentials.json`)
+5. In Google Cloud project, go to **OAuth consent screen** → **Test users** section
+6. Add your Gmail address (the one you'll use to parse emails and show them on sheets)
+
+---
 
 ### Step 3: Create Google Sheet
-1. Go to Google Sheets
+
+1. Go to **Google Sheets**
 2. Create a new blank sheet
 3. Copy the ID from URL:
    ```
    https://docs.google.com/spreadsheets/d/COPY_THIS_PART/edit
    ```
 
+---
+
 ### Step 4: Update config.py
+
 Open `config.py` and paste your Spreadsheet ID:
+
 ```python
 SPREADSHEET_ID = 'paste_your_id_here'
 ```
 
+---
+
 ### Step 5: Run!
+
 ```bash
 python main.py
 ```
@@ -99,23 +115,53 @@ python main.py
 - No browser needed (uses saved tokens)
 
 ---
-### Proof of Work
----
-**Following error can occur if you not add the gmail in test user**
+
+## 📸 Proof of Work
+
+### Common Error: Test User Not Added
+
+**Following error can occur if you don't add the Gmail in test user:**
+
 <img width="1604" height="597" alt="Screenshot 2026-01-14 215118" src="https://github.com/user-attachments/assets/b39d359e-8ea7-4560-8dea-98aa79f0644d" />
-**make sure to add gmail here**
+
+**Make sure to add Gmail here:**
+
 <img width="1918" height="852" alt="image" src="https://github.com/user-attachments/assets/2ac31145-5f83-4bc8-a9c9-8840124c4ad1" />
 
-- After this run the program again if you face this error
-- then you will see web page open there gonna be some mail select one that you put it in the test user section.
-- then there will be this thing pop up
-- <img width="1919" height="939" alt="Screenshot 2026-01-14 221149" src="https://github.com/user-attachments/assets/7f0373f1-e549-4cd4-bc33-9fbd7e42f2da" />
-- click on continue then it will show this
-- <img width="1919" height="933" alt="Screenshot 2026-01-14 221346" src="https://github.com/user-attachments/assets/8d856cb0-6a86-4976-92df-695e5668603b" />
-- it means your project start and parser you mail
-- <img width="1826" height="907" alt="Screenshot 2026-01-14 225912" src="https://github.com/user-attachments/assets/674283e9-80d4-4a29-98ef-932f22a82d3f" />
-**It will take time at first to run then your google sheet looks like this** 
+---
+
+### OAuth Flow
+
+After adding the test user, run the program again if you face the error.
+
+**Step 1:** Web page opens - select the Gmail you added in test user section
+
+**Step 2:** This popup will appear:
+
+<img width="1919" height="939" alt="Screenshot 2026-01-14 221149" src="https://github.com/user-attachments/assets/7f0373f1-e549-4cd4-bc33-9fbd7e42f2da" />
+
+Click on **"Continue"**
+
+**Step 3:** You'll see this confirmation:
+
+<img width="1919" height="933" alt="Screenshot 2026-01-14 221346" src="https://github.com/user-attachments/assets/8d856cb0-6a86-4976-92df-695e5668603b" />
+
+This means your project has started and is parsing your mail.
+
+---
+
+### Script Execution
+
+<img width="1826" height="907" alt="Screenshot 2026-01-14 225912" src="https://github.com/user-attachments/assets/674283e9-80d4-4a29-98ef-932f22a82d3f" />
+
+**Note:** It will take time at first run to process all emails.
+
+---
+
+### Final Result
+
+**Your Google Sheet will look like this:**
+
 <img width="1919" height="940" alt="Screenshot 2026-01-14 225725" src="https://github.com/user-attachments/assets/76706db0-9a96-4609-8fe6-b47f9f457c61" />
 
 ---
-
