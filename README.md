@@ -64,8 +64,12 @@ pip install -r requirements.txt
 ```
 
 ### Step 2: Add credentials.json
-1. You already have this from Google Cloud Console
-2. Put it in: `credentials/credentials.json`
+1. Go to the google cloud console make the project name whatever you like.
+2. Then enable the api by searching Gmail API and Google Sheets API.
+3. Then create OAuth client ID there you find the json file to download ` it's client secret `
+4. Put it in: `credentials/credentials.json` you can rename the json file to credentials.json.
+5. In google cloud project go to Audience section to add test
+6. You will see there test user you need to add your gmail there from which you will parser the emails and show it on sheets.
 
 ### Step 3: Create Google Sheet
 1. Go to Google Sheets
@@ -95,180 +99,23 @@ python main.py
 - No browser needed (uses saved tokens)
 
 ---
+### Proof of Work
+# Following error can occur if you not add the gmail in test user
+<img width="1604" height="597" alt="Screenshot 2026-01-14 215118" src="https://github.com/user-attachments/assets/b39d359e-8ea7-4560-8dea-98aa79f0644d" />
+# make sure to add gmail here
+<img width="1918" height="852" alt="image" src="https://github.com/user-attachments/assets/2ac31145-5f83-4bc8-a9c9-8840124c4ad1" />
 
-## 🔐 How OAuth Works
+- After this run the program again if you face this error
+- then you will see web page open there gonna be some mail select one that you put it in the test user section.
+- then there will be this thing pop up
+- <img width="1919" height="939" alt="Screenshot 2026-01-14 221149" src="https://github.com/user-attachments/assets/7f0373f1-e549-4cd4-bc33-9fbd7e42f2da" />
+- click on continue then it will show this
+- <img width="1919" height="933" alt="Screenshot 2026-01-14 221346" src="https://github.com/user-attachments/assets/8d856cb0-6a86-4976-92df-695e5668603b" />
+- it means your project start and parser you mail
+- <img width="1826" height="907" alt="Screenshot 2026-01-14 225912" src="https://github.com/user-attachments/assets/674283e9-80d4-4a29-98ef-932f22a82d3f" />
+# It will take time at first to run then your google sheet looks like this 
+<img width="1919" height="940" alt="Screenshot 2026-01-14 225725" src="https://github.com/user-attachments/assets/76706db0-9a96-4609-8fe6-b47f9f457c61" />
 
-**First Time:**
-1. Script looks for saved tokens
-2. Not found → Opens browser
-3. You login and allow access
-4. Token saved in `credentials/`
 
-**Next Times:**
-1. Script uses saved token
-2. If expired → Auto-refreshes
-3. No browser needed
 
----
 
-## 🔄 How Duplicate Prevention Works
-
-**Problem:** If we run script twice, same emails get added again
-
-**Solution:** Track processed email IDs
-
-**Method:**
-1. Every Gmail message has unique ID (never changes)
-2. After processing → Save ID to `state.json`
-3. Next run → Check if ID exists in state
-4. If exists → Skip
-5. If new → Process
-
-**Example state.json:**
-```json
-{
-  "processed_ids": ["msg_123", "msg_456", "msg_789"],
-  "last_run": "2026-01-14 10:30:00"
-}
-```
-
-**Why this works:**
-- ✅ Fast (no need to check Google Sheets)
-- ✅ Reliable (email IDs never change)
-- ✅ Simple (just one JSON file)
-
----
-
-## 💾 State Persistence
-
-**File:** `state.json`
-
-**What it stores:**
-- List of processed email IDs
-- Last run timestamp
-
-**Why JSON file:**
-- Simple and readable
-- No database needed
-- Easy to reset (just delete file)
-- Won't be committed to Git (.gitignore protects it)
-
----
-
-## 📊 Bonus Features
-
-### 1. Logging with Timestamps
-Every action is logged with timestamp:
-```
-[2026-01-14 10:30:45] 🚀 Starting Gmail to Sheets automation...
-[2026-01-14 10:30:46] 📧 Connecting to Gmail...
-[2026-01-14 10:30:47] 📬 Found 5 unread emails
-```
-
-### 2. Subject-Based Filtering
-Only process emails with specific words in subject.
-
-**How to enable:** Edit `config.py`
-```python
-# Only process invoices
-FILTER_SUBJECT = 'Invoice'
-
-# Only process orders
-FILTER_SUBJECT = 'Order'
-
-# Process all emails
-FILTER_SUBJECT = None
-```
-
----
-
-## 🧗 Challenge Faced
-
-**Problem:** Emails have complex formats (HTML, plain text, attachments)
-
-Gmail stores email bodies in different parts:
-- Some emails = plain text only
-- Some emails = HTML only
-- Some emails = both + attachments
-
-**Solution:**
-- Check if email has multiple parts
-- Look for `text/plain` type
-- Decode from base64
-- Handle nested parts (recursion)
-- Limit to 50,000 characters (Google Sheets limit)
-
-Code in `email_parser.py` → `_get_body()` method
-
----
-
-## ⚠️ Limitations
-
-1. **Max 100 emails per run**
-   - Gmail API default limit
-   - Solution: Run script multiple times
-
-2. **No concurrent runs**
-   - Running twice at same time = possible duplicates
-   - Solution: Use cron/scheduler
-
-3. **Email body truncated at 50,000 chars**
-   - Google Sheets cell limit
-   - Long emails will be cut off
-
-4. **State file grows with emails**
-   - 1000 emails = ~50KB state file
-   - Not a problem unless millions of emails
-
----
-
-## 🧪 Testing Duplicate Prevention
-
-1. Run script once:
-   ```bash
-   python main.py
-   ```
-
-2. Check Google Sheet - emails appear
-
-3. Run script again (without new emails):
-   ```bash
-   python main.py
-   ```
-
-4. Check logs - should say:
-   ```
-   ⏭️  Skipping already processed: msg_...
-   ℹ️  No new emails to add
-   ```
-
-5. Check Google Sheet - NO duplicates
-
----
-
-## 📸 Proof of Execution
-
-See `proof/` folder for:
-- Gmail inbox screenshots
-- Google Sheet with data
-- OAuth consent screens
-- Demo video
-
----
-
-## 🔧 Troubleshooting
-
-**"credentials.json not found"**
-→ Put file in `credentials/` folder
-
-**"SPREADSHEET_ID not found"**
-→ Update in `config.py`
-
-**OAuth error**
-→ Make sure Gmail & Sheets APIs are enabled
-→ Add yourself as test user in Google Console
-
----
-
-**Submission:** [Date]  
-**Repository:** [GitHub Link]
