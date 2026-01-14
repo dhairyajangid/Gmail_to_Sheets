@@ -1,10 +1,4 @@
-"""
-Configuration Settings
-Update SPREADSHEET_ID here
-"""
-
 import os
-
 
 class Config:
     # Base directory
@@ -18,7 +12,7 @@ class Config:
     STATE_FILE = os.path.join(BASE_DIR, 'state.json')
 
     # Google Sheet ID (get from your sheet URL)
-    SPREADSHEET_ID = "1CbenTsTHRKO2hBdi-dGuPKAIFzyoVS7LrbKS9GPBEMM"
+    SPREADSHEET_ID = "put your id here"
 
     # Optional: Filter emails by subject (set too None to process all)
     FILTER_SUBJECT = None
