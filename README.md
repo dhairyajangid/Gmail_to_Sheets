@@ -100,9 +100,10 @@ python main.py
 
 ---
 ### Proof of Work
-# Following error can occur if you not add the gmail in test user
+---
+**Following error can occur if you not add the gmail in test user**
 <img width="1604" height="597" alt="Screenshot 2026-01-14 215118" src="https://github.com/user-attachments/assets/b39d359e-8ea7-4560-8dea-98aa79f0644d" />
-# make sure to add gmail here
+**make sure to add gmail here**
 <img width="1918" height="852" alt="image" src="https://github.com/user-attachments/assets/2ac31145-5f83-4bc8-a9c9-8840124c4ad1" />
 
 - After this run the program again if you face this error
@@ -113,9 +114,8 @@ python main.py
 - <img width="1919" height="933" alt="Screenshot 2026-01-14 221346" src="https://github.com/user-attachments/assets/8d856cb0-6a86-4976-92df-695e5668603b" />
 - it means your project start and parser you mail
 - <img width="1826" height="907" alt="Screenshot 2026-01-14 225912" src="https://github.com/user-attachments/assets/674283e9-80d4-4a29-98ef-932f22a82d3f" />
-# It will take time at first to run then your google sheet looks like this 
+**It will take time at first to run then your google sheet looks like this** 
 <img width="1919" height="940" alt="Screenshot 2026-01-14 225725" src="https://github.com/user-attachments/assets/76706db0-9a96-4609-8fe6-b47f9f457c61" />
 
-
-
+---
 
