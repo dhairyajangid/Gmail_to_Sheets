@@ -152,11 +152,13 @@ This means your project has started and is parsing your mail.
 
 ### Script Execution
 
-<img width="1826" height="907" alt="Screenshot 2026-01-14 225912" src="https://github.com/user-attachments/assets/674283e9-80d4-4a29-98ef-932f22a82d3f" />
+<img width="1825" height="999" alt="Screenshot 2026-01-14 225811" src="https://github.com/user-attachments/assets/2afa371f-e396-4bb8-b2ad-6e1c98075fe2" />
 
 **Note:** It will take time at first run to process all emails.
 
 ---
+
+
 
 ### Final Result
 
